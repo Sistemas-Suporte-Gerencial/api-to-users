@@ -9,6 +9,12 @@ router.use(validToken);
 router.post('/migrate', (req, res) => {
     let {text, databases, excludes} = req.body;
 
+    if(!text){
+        return res.status(400).json({
+            error: 'Missing text'
+        });
+    }
+
     let count = 0;
     const successfull = [];
     const errors = [];
