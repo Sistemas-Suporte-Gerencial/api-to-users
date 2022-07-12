@@ -30,10 +30,10 @@ export const sendEmail = async (req, res) =>{
 
         await transporter.sendMail({
             from: 'SGEDU-SUPORTEGERENCIAL 👻" <sgedu@suportegerencial.com.br>',
-            to: 'guilhermeyla@gmail.com',
-            subject: 'redbull',
-            text: 'redbull',
-            html: '<b>redbull</b>'
+            to,
+            subject,
+            text,
+            html
         });
 
         return res.status(200).json({
