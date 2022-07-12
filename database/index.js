@@ -1,6 +1,6 @@
 import pg from 'pg';
 
-export function initDb(){
+export const initDb = () => {
     const pool = new pg.Pool({
         user: process.env.USER_DB,
         host: process.env.HOST_DB,

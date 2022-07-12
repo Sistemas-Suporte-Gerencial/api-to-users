@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-export function decrypt(text) {
+export const decrypt = (text) => {
     let iv = new Buffer.from(process.env.IV_HASH, 'hex');
     let encryptedText = new Buffer.from(text, 'hex');
     let decipher = crypto.createDecipheriv('aes-256-cbc', new Buffer.from(process.env.PASSWORD), iv);
@@ -11,7 +11,7 @@ export function decrypt(text) {
     return decrypted.toString();
 }
 
-export function encrypt(text) {
+export const encrypt = (text) => {
     if (process.versions.openssl <= '1.0.1f') {
         throw new Error('OpenSSL Version too old, vulnerability to Heartbleed')
     }
