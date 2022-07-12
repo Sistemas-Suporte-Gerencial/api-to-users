@@ -8,6 +8,12 @@ export const sendEmail = async (req, res) =>{
     try {
         const { to, subject, text, html } = req.body;
 
+        if(!to || !subject || !text){
+            return res.status(400).json({
+                message: 'Missing required fields'
+            });
+        }
+
         const acessToken = await oauth2Client.getAccessToken();
 
         let transporter = createTransport({
