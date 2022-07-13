@@ -3,15 +3,12 @@ import {initDb} from '../database/index.js';
 
 const pool = initDb();
 
-console.log(pool)
-
 export const queryUser = async (req, res) => {
     const {name, email, password} = req.body;
-
-    console.log(name, email, password)
       
     try {
         const sql = `SELECT u.id_usuario, u.nome_usuario, u.email_usuario, u.senha_nova FROM usuarios u WHERE 1=1 ${email !== undefined ? `AND u.email_usuario ILIKE '%${email}%'` : ''} ${name !== undefined ? `AND u.nome_usuario ILIKE '%${name}%'` : '' } ${password !== undefined ? `AND u.senha_nova = '${encrypt(password)}'` : ''}`;
+        console.log(sql);
 
         const resp = await pool.query(sql);
 
