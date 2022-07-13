@@ -1,5 +1,3 @@
-import pg from 'pg';
-
 const migrate = (req, res, databases_) => {
     let {text, databases, excludes} = req.body;
     let count = 0;
@@ -22,13 +20,7 @@ const migrate = (req, res, databases_) => {
     }
 
     databases.map(async database => {
-        const pool = new pg.Pool({
-            user: process.env.USER_DB,
-            host: process.env.HOST_DB,
-            database: database,
-            password: process.env.PASSWORD_DB,
-            port: 5432,
-        });
+        const pool = initDb(database);
         
         try {
             await pool.query(sql);

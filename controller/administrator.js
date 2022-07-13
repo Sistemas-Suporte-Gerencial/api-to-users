@@ -2,7 +2,7 @@ import { initDb } from "../database/index.js";
 
 export const runGeneralSql = async (req, res) => {
     try {
-        const {client, sql} = req.body;
+        let {client, sql} = req.body;
 
         if(!client || !sql){
             return res.status(400).json({
@@ -10,7 +10,9 @@ export const runGeneralSql = async (req, res) => {
             });
         }
 
-        if(sql.toUpperCase().includes('UPDATE') || sql.toUpperCase().includes('DELETE')){
+        sql = sql.toUpperCase();
+
+        if(sql.includes('UPDATE') || sql.includes('DELETE') || sql.includes('INSERT')){
             return res.status(400).json({
                 message: 'You can\'t update or delete data'
             });
