@@ -3,6 +3,8 @@ import {initDb} from '../database/index.js';
 
 const pool = initDb();
 
+console.log(pool)
+
 export const queryUser = async (req, res) => {
     const {name, email, password} = req.body;
       
